@@ -52,8 +52,8 @@ public class UDPManager {
                     if (isConnected()) {
                         return;
                     }
-                    InetSocketAddress remoteSocketAddress = new InetSocketAddress(Constant.TestHost, Constant.UdpPort);
-                    InetSocketAddress localSocketAddress = new InetSocketAddress(Utils.getLocalIPAddress(), 3000);
+                    InetSocketAddress remoteSocketAddress = new InetSocketAddress(NetConst.Host, NetConst.UdpPort);
+                    InetSocketAddress localSocketAddress = new InetSocketAddress(NetUtils.getLocalIPAddress(), 3000);
                     future = connector.connect(remoteSocketAddress, localSocketAddress);
                     future.awaitUninterruptibly();
                     future.getSession();
@@ -98,6 +98,7 @@ public class UDPManager {
 
     public IoSession getCurrentSession() {
         if (connector.getManagedSessionCount() > 0) {
+            //noinspection LoopStatementThatDoesntLoop
             for (Long key : connector.getManagedSessions().keySet()) {
                 return connector.getManagedSessions().get(key);
             }

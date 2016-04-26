@@ -52,7 +52,7 @@ public class TCPManager {
                     if (isConnected()) {
                         return;
                     }
-                    InetSocketAddress remoteSocketAddress = new InetSocketAddress(Constant.TestHost, Constant.TcpPort);
+                    InetSocketAddress remoteSocketAddress = new InetSocketAddress(NetConst.Host, NetConst.TcpPort);
                     future = connector.connect(remoteSocketAddress);
                     future.awaitUninterruptibly();
                     future.getSession();
@@ -96,6 +96,7 @@ public class TCPManager {
 
     public IoSession getCurrentSession() {
         if (connector.getManagedSessionCount() > 0) {
+            //noinspection LoopStatementThatDoesntLoop
             for (Long key : connector.getManagedSessions().keySet()) {
                 return connector.getManagedSessions().get(key);
             }
@@ -151,8 +152,8 @@ public class TCPManager {
         @Override
         public void messageReceived(IoSession ioSession, Object object) throws Exception {
             MsgData data = (MsgData) object;
-            listener.onConnect(ConnectListener.CONN_OK, data);
             Log.i(TAG, "收到数据: " + data.toLogString() + " " + ioSession.getLocalAddress());
+            listener.onConnect(ConnectListener.CONN_OK, data);
         }
 
         @Override

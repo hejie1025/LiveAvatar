@@ -12,22 +12,38 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="36dp"
+        android:contentDescription="@null"
         android:src="@drawable/model_1" />
 
     <ImageView
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:contentDescription="@null"
         android:scaleType="centerCrop"
         android:src="@drawable/board" />
 
     <ImageView
-        android:onClick="match"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
+        android:contentDescription="@null"
+        android:onClick="match"
         android:src="@drawable/selector_match" />
+
+    <ImageView
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@null"
+        android:src="@drawable/progress"
+        android:visibility="gone" />
 </RelativeLayout>
