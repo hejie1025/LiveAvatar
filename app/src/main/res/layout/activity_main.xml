@@ -3,47 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_1"
     tools:context=".ui.MainActivity">
 
-    <ImageView
-        android:id="@+id/model"
+    <EditText
+        android:id="@+id/user_id"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:hint="用户名"/>
+
+    <Button
+        android:id="@+id/connect"
+        android:onClick="connect"
+        android:layout_below="@+id/user_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
-        android:contentDescription="@null"
-        android:src="@drawable/model_1" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:contentDescription="@null"
-        android:scaleType="centerCrop"
-        android:src="@drawable/board" />
-
-    <ImageView
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@null"
-        android:onClick="match"
-        android:src="@drawable/selector_match" />
-
-    <ImageView
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@null"
-        android:src="@drawable/progress"
-        android:visibility="gone" />
+        android:text="连接"/>
 </RelativeLayout>

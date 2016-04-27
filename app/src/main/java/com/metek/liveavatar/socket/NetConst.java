@@ -13,4 +13,6 @@ public class NetConst {
     public static final int CODE_REFUSE = 1005;
     public static final int CODE_CLOSE = 1006;
     public static final int CODE_EXIT = 1007;
+
+    public static final int CODE_REC_ADDR = 1009;
 }
