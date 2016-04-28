@@ -53,8 +53,8 @@ public class UDPManager {
                         return;
                     }
                     InetSocketAddress remoteSocketAddress = new InetSocketAddress(NetConst.Host, NetConst.UdpPort);
-                    InetSocketAddress localSocketAddress = new InetSocketAddress(NetUtils.getLocalIPAddress(), 3000);
-                    future = connector.connect(remoteSocketAddress, localSocketAddress);
+                    InetSocketAddress localSocketAddress = new InetSocketAddress(NetUtils.getLocalIPAddress(), 2333);
+                    future = connector.connect(remoteSocketAddress);
                     future.awaitUninterruptibly();
                     future.getSession();
                 } catch (Exception e) {
