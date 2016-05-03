@@ -12,6 +12,20 @@
         android:layout_height="48dp"
         android:hint="远程目标 用户名"/>
 
+    <EditText
+        android:id="@+id/port"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_toRightOf="@id/friend_id"
+        android:hint="UDP PORT"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="heart"
+        android:text="heart"
+        android:layout_below="@+id/friend_id"/>
+
     <ImageView
         android:id="@+id/model"
         android:layout_width="wrap_content"

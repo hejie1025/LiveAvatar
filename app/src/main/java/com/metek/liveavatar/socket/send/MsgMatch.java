@@ -4,6 +4,7 @@ import com.metek.liveavatar.socket.MsgData;
 import com.metek.liveavatar.socket.NetConst;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MsgMatch extends MsgData {
 
@@ -13,13 +14,14 @@ public class MsgMatch extends MsgData {
 
     public MsgMatch(String friendid, String userid) {
         super(NetConst.CODE_MATCH);
+        JSONObject json = new JSONObject();
         try {
-            mJson.put(FRIENDID, friendid);
-            mJson.put(USERID, userid);
+            json.put(KEY_FRIENDID, friendid);
+            json.put(KEY_USERID, userid);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        size = mJson.toString().getBytes().length;
-        body = mJson.toString().getBytes();
+        size = json.toString().getBytes().length;
+        body = json.toString().getBytes();
     }
 }

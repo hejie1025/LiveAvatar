@@ -25,7 +25,7 @@ public class TCPManager {
     private ConnectListener listener;
 
     private TCPManager() {
-        executor = Executors.newFixedThreadPool(1);
+        executor = Executors.newFixedThreadPool(3);
         connector = new NioSocketConnector();
         connector.setConnectTimeoutMillis(5000);
         connector.getSessionConfig().setBothIdleTime(120);

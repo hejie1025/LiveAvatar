@@ -1,10 +1,11 @@
 package com.metek.liveavatar.socket;
 
-import org.json.JSONObject;
+public interface JsonModel {
+    public static final String KEY_USERID = "userid";
+    public static final String KEY_FRIENDID = "friendid";
 
-public class JsonModel {
-    public static final String USERID = "userid";
-    public static final String FRIENDID = "friendid";
-
-    protected JSONObject mJson = new JSONObject();
+    public static final String KEY_FIP = "fIP";
+    public static final String KEY_FPORT = "fport";
+    public static final String KEY_IP = "IP";
+    public static final String KEY_PORT = "port";
 }

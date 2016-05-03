@@ -12,12 +12,12 @@ public class RecMsgMatch extends MsgData {
 
     public RecMsgMatch(MsgData data) {
         super(data.code, data.size, data.body);
-        String json = new String(data.body);
-        JSONTokener jsonParser = new JSONTokener(json);
+        String jsonBody = new String(data.body);
+        JSONTokener jsonParser = new JSONTokener(jsonBody);
         try {
-            mJson = (JSONObject) jsonParser.nextValue();
-            friendid = mJson.getString(FRIENDID);
-            userid = mJson.getString(USERID);
+            JSONObject json = (JSONObject) jsonParser.nextValue();
+            friendid = json.getString(KEY_FRIENDID);
+            userid = json.getString(KEY_USERID);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -44,7 +44,7 @@ public class UDPManager {
         this.listener = listener;
     }
 
-    public void connect() {
+    public void connect(final String RemoteHost, final int RemotePort, final int Port) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -52,9 +52,9 @@ public class UDPManager {
                     if (isConnected()) {
                         return;
                     }
-                    InetSocketAddress remoteSocketAddress = new InetSocketAddress(NetConst.Host, NetConst.UdpPort);
-                    InetSocketAddress localSocketAddress = new InetSocketAddress(NetUtils.getLocalIPAddress(), 2333);
-                    future = connector.connect(remoteSocketAddress);
+                    InetSocketAddress remoteSocketAddress = new InetSocketAddress(RemoteHost, RemotePort);
+                    InetSocketAddress localSocketAddress = new InetSocketAddress(NetUtils.getLocalIPAddress(), Port);
+                    future = connector.connect(remoteSocketAddress, localSocketAddress);
                     future.awaitUninterruptibly();
                     future.getSession();
                 } catch (Exception e) {
@@ -65,11 +65,18 @@ public class UDPManager {
         });
     }
 
-    public void send(final MsgData data) {
+    public void send(final MsgData data, final String RemoteHost, final int RemotePort, final int Port) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                IoSession session = getCurrentSession();
+                if (isConnected()) {
+                    return;
+                }
+                InetSocketAddress remoteSocketAddress = new InetSocketAddress(RemoteHost, RemotePort);
+                InetSocketAddress localSocketAddress = new InetSocketAddress(NetUtils.getLocalIPAddress(), Port);
+                future = connector.connect(remoteSocketAddress, localSocketAddress);
+                future.awaitUninterruptibly();
+                IoSession session = future.getSession();
                 if (session != null && session.isConnected()) {
                     WriteFuture writeFuture = session.write(data);
                     writeFuture.awaitUninterruptibly(5, TimeUnit.SECONDS);
@@ -81,7 +88,6 @@ public class UDPManager {
                 }
             }
         });
-
     }
 
     public boolean isConnected() {
@@ -156,6 +162,7 @@ public class UDPManager {
             MsgData data = (MsgData) object;
             listener.onConnect(ConnectListener.CONN_OK, data);
             Log.i(TAG, "收到数据: " + data.toLogString() + " " + ioSession.getLocalAddress());
+            ioSession.close(true);
         }
 
         @Override

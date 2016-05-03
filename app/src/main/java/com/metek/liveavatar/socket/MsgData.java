@@ -1,18 +1,14 @@
 package com.metek.liveavatar.socket;
 
-import org.json.JSONObject;
-
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class MsgData extends JsonModel implements Serializable {
+public class MsgData implements JsonModel, Serializable {
     public static final int HEAD_SIZE = 8;
     public int code;
     public int size;
     public byte[] body;
-
-    protected JSONObject mJson = new JSONObject();
 
     public MsgData(int code) {
         this(code, "");
