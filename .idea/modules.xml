@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LiveAvatar.iml" filepath="$PROJECT_DIR$/LiveAvatar.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cvFaceAPI/cvFaceAPI.iml" filepath="$PROJECT_DIR$/cvFaceAPI/cvFaceAPI.iml" />
     </modules>
   </component>
 </project>

@@ -15,8 +15,11 @@ import java.nio.ByteOrder;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class UDPClient implements Utilities.SocketInterface {
+public class UDPClient {
     private static final String TAG = UDPClient.class.getSimpleName();
+    public static final String DISPLAY_MESSAGE_ACTION = "com.metek.liveavatar.DISPLAY_MESSAGE";
+    public static final String EXTRA_MESSAGE = "message";
+
     private boolean isReceive = false;
     private Context context;
     private DatagramSocket datagramSocket;
@@ -64,8 +67,8 @@ public class UDPClient implements Utilities.SocketInterface {
                         MsgData data = new MsgData(code, size, body);
                         Log.i(TAG, "接受数据 " + data.toLogString());
 
-                        Intent intent = new Intent(Utilities.ActivityInterface.DISPLAY_MESSAGE_ACTION);
-                        intent.putExtra(Utilities.ActivityInterface.EXTRA_MESSAGE, data);
+                        Intent intent = new Intent(DISPLAY_MESSAGE_ACTION);
+                        intent.putExtra(EXTRA_MESSAGE, data);
                         context.sendBroadcast(intent);
                     } catch (IOException e) {
                         e.printStackTrace();

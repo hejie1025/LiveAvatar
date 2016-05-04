@@ -66,4 +66,23 @@
         android:contentDescription="@null"
         android:src="@drawable/progress"
         android:visibility="gone" />
+
+    <com.metek.liveavatar.face.FixedAspectRatioFrameLayout
+        android:layout_width="210dp"
+        android:layout_height="280dp" >
+
+        <fragment
+            android:id="@+id/face_overlap_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.metek.liveavatar.face.FaceOverlapFragment" >
+        </fragment>
+    </com.metek.liveavatar.face.FixedAspectRatioFrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/live2d_frame"
+        android:layout_marginLeft="110dp"
+        android:layout_marginRight="-110dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
