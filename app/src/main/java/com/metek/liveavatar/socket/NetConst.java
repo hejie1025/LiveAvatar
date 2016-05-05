@@ -15,5 +15,5 @@ public class NetConst {
     public static final int CODE_EXIT = 1007;
 
     public static final int CODE_REC_ADDR = 1009;
-    public static final int CODE_SEND_DATA = 1100;
+    public static final int CODE_SEND_FACE_DATA = 1100;
 }

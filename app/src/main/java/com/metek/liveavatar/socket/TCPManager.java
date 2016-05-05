@@ -62,6 +62,20 @@ public class TCPManager {
                 }
             }
         });
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    send(new MsgData(NetConst.CODE_HEART));
+                }
+            }
+        });
     }
 
     public void send(final MsgData data) {

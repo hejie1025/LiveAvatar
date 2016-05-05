@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         etUserId = (EditText) findViewById(R.id.user_id);
     }
 
@@ -41,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public void connect(View view) {
-        TCPManager.getManager().connect();
+    public void transform(View view) {
         TCPManager.getManager().setConnectListener(tcpListener);
+        TCPManager.getManager().connect();
     }
 }

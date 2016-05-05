@@ -4,25 +4,21 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.cv.faceapi.Accelerometer;
 import com.metek.liveavatar.R;
 import com.metek.liveavatar.face.FaceOverlapFragment;
+import com.metek.liveavatar.live2d.FaceData;
 import com.metek.liveavatar.live2d.FileManager;
-import com.metek.liveavatar.live2d.Live2dManager;
 import com.metek.liveavatar.live2d.Live2dView;
 import com.metek.liveavatar.socket.MsgData;
 import com.metek.liveavatar.socket.NetConst;
-import com.metek.liveavatar.socket.NetUtils;
 import com.metek.liveavatar.socket.TCPManager;
+import com.metek.liveavatar.socket.receive.RecMsgFaceData;
 import com.metek.liveavatar.socket.receive.RecMsgMatch;
+import com.metek.liveavatar.socket.send.MsgFaceData;
 import com.metek.liveavatar.socket.send.MsgMatch;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class ChatActivity extends AppCompatActivity implements FaceOverlapFragment.onActionChangeListener {
     private static final String TAG = ChatActivity.class.getSimpleName();
@@ -30,13 +26,14 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
     private static final int STATE_MATCH = 2;
     private int state = STATE_MIRROR;
 
+    private ImageView ivBoard;
     private ImageView ivButton;
     private ImageView ivProgress;
     private EditText etFriendId;
-    private EditText etPort;
-
-    public static Accelerometer acc;
     private Live2dView view;
+
+    private String friendId;
+    private boolean isChatting = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -45,29 +42,27 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
 
         FileManager.init(this.getApplicationContext());
 
-        view = new Live2dManager().createView(this);
-        ViewGroup live2dFrame = (ViewGroup) findViewById(R.id.live2d_frame);
-        live2dFrame.addView(view);
-
         FaceOverlapFragment fragment = (FaceOverlapFragment) getFragmentManager()
                 .findFragmentById(R.id.face_overlap_fragment);
         fragment.setOnActionChangeListener(this);
 
-        acc = new Accelerometer(this);
-        acc.start();
-
-
+        ivBoard = (ImageView) findViewById(R.id.board);
         ivButton = (ImageView) findViewById(R.id.button);
         ivProgress = (ImageView) findViewById(R.id.progress);
         etFriendId = (EditText) findViewById(R.id.friend_id);
-        etPort = (EditText) findViewById(R.id.port);
+        view = (Live2dView) findViewById(R.id.model);
+        view.isInEditMode();
 
         TCPManager.getManager().setConnectListener(tcpListener);
     }
 
     @Override
-    public void onActionChange(String actionKey, float actionValue) {
-        view.setAction(actionKey, actionValue);
+    public void onActionChange(FaceData data) {
+        if (isChatting) {
+            MsgFaceData msgFaceData = new MsgFaceData(friendId, data);
+            TCPManager.getManager().send(msgFaceData);
+        }
+//        view.setAction(data);
     }
 
     TCPManager.ConnectListener tcpListener = new TCPManager.ConnectListener() {
@@ -80,9 +75,12 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
                 case NetConst.CODE_MATCH:
                     Log.v(TAG, "匹配成功");
                     RecMsgMatch recMsgMatch = new RecMsgMatch(data);
+                    friendId = recMsgMatch.getFriendid();
+                    isChatting = true;
                     break;
-                case NetConst.CODE_SEND_DATA:
-                    Log.v(TAG, "接受心跳包");
+                case NetConst.CODE_SEND_FACE_DATA:
+                    RecMsgFaceData recMsgFaceData = new RecMsgFaceData(data);
+                    view.setAction(recMsgFaceData.getFaceData());
                     break;
             }
         }
@@ -106,15 +104,5 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
     }
 
     public void heart(View view) {
-        JSONObject json = new JSONObject();
-        try {
-            json.put("friendid", etFriendId.getText().toString());
-            json.put("data", NetUtils.getLocalIPAddress());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        MsgData heart = new MsgData(NetConst.CODE_SEND_DATA, json.toString());
-        TCPManager.getManager().send(heart);
     }
 }

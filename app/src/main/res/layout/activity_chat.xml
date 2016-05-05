@@ -8,35 +8,48 @@
 
     <EditText
         android:id="@+id/friend_id"
-        android:layout_width="160dp"
+        android:layout_width="120dp"
         android:layout_height="48dp"
-        android:hint="远程目标 用户名"/>
-
-    <EditText
-        android:id="@+id/port"
-        android:layout_width="160dp"
-        android:layout_height="48dp"
-        android:layout_toRightOf="@id/friend_id"
-        android:hint="UDP PORT"/>
+        android:layout_marginTop="64dp"
+        android:hint="远端用户名" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/friend_id"
         android:onClick="heart"
-        android:text="heart"
-        android:layout_below="@+id/friend_id"/>
+        android:text="heart" />
 
-    <ImageView
-        android:id="@+id/model"
+
+    <com.metek.liveavatar.face.FixedAspectRatioFrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
-        android:contentDescription="@null"
-        android:src="@drawable/model_1" />
+        android:layout_marginTop="180dp">
+
+        <com.metek.liveavatar.live2d.Live2dView
+            android:id="@+id/model"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.metek.liveavatar.face.FixedAspectRatioFrameLayout>
+
+    <com.metek.liveavatar.face.FixedAspectRatioFrameLayout
+        android:id="@+id/camera"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp">
+
+        <fragment
+            android:id="@+id/face_overlap_fragment"
+            class="com.metek.liveavatar.face.FaceOverlapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_camera_overlap" />
+    </com.metek.liveavatar.face.FixedAspectRatioFrameLayout>
 
     <ImageView
+        android:id="@+id/board"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -66,23 +79,4 @@
         android:contentDescription="@null"
         android:src="@drawable/progress"
         android:visibility="gone" />
-
-    <com.metek.liveavatar.face.FixedAspectRatioFrameLayout
-        android:layout_width="210dp"
-        android:layout_height="280dp" >
-
-        <fragment
-            android:id="@+id/face_overlap_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="com.metek.liveavatar.face.FaceOverlapFragment" >
-        </fragment>
-    </com.metek.liveavatar.face.FixedAspectRatioFrameLayout>
-
-    <RelativeLayout
-        android:id="@+id/live2d_frame"
-        android:layout_marginLeft="110dp"
-        android:layout_marginRight="-110dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 </RelativeLayout>

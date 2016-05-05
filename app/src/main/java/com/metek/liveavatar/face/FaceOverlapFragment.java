@@ -14,13 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cv.faceapi.Accelerometer;
 import com.cv.faceapi.CVImageFormat;
 import com.cv.faceapi.CvFace106;
 import com.cv.faceapi.CvFaceMultiTrack106;
 import com.cv.faceapi.CvUtils;
-import com.metek.liveavatar.live2d.Live2dModel;
-import com.metek.liveavatar.ui.ChatActivity;
+import com.metek.liveavatar.live2d.FaceData;
+import com.metek.liveavatar.live2d.FaceDataTransformer;
 
 @SuppressWarnings("deprecation")
 public class FaceOverlapFragment extends CameraOverlapFragment {
@@ -31,7 +30,7 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
 	
 	private onActionChangeListener listener;
 	public interface onActionChangeListener {
-		public void onActionChange(String actionKey, float actionValue);
+		public void onActionChange(FaceData data);
 	}
 	
 	public void setOnActionChangeListener(onActionChangeListener listener) {
@@ -58,15 +57,11 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (ChatActivity.acc != null)
-			ChatActivity.acc.start();
 		startTrack();
 	}
 
 	@Override
 	public void onPause() {
-		if (ChatActivity.acc != null)
-			ChatActivity.acc.stop();
 		stopTrack();
 		super.onPause();
 	}
@@ -92,10 +87,10 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
 					}
 					
 					// 重力传感器返回的方向
-					int direction = Accelerometer.getDirection();
-					if ((direction & 1) == 1) {
-						direction = (direction ^ 2);
-					}
+//					int direction = Accelerometer.getDirection();
+//					if ((direction & 1) == 1) {
+//						direction = (direction ^ 2);
+//					}
 					
 					// 调用实时人脸检测函数，返回当前人脸信息
 					CvFace106[] faces = tracker.track(
@@ -104,7 +99,7 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
 							PREVIEW_WIDTH,
 							PREVIEW_HEIGHT,
 							PREVIEW_WIDTH,
-							direction);
+							3);
 					
 					// 绘制人脸框
 					if (faces != null) {
@@ -138,62 +133,8 @@ public class FaceOverlapFragment extends CameraOverlapFragment {
 //							drawPath(canvas, points, 58, 63);
 //							drawPath(canvas, points[63], points[58]);
 
-							listener.onActionChange(Live2dModel.P_ANGLE_X, face.yaw);
-							listener.onActionChange(Live2dModel.P_ANGLE_Y, -face.pitch);
-							listener.onActionChange(Live2dModel.P_ANGLE_Z, face.roll / Math.abs(face.roll) * (Math.abs(face.roll) - 90));
-
-//							float mouthInWidth = Math.abs(points[97].x - points[99].x);
-//							float mouthInHeight = Math.abs(points[97].y - points[103].y);
-//							if (Float.compare(mouthInWidth, 0.0f) != 0) {
-//								listener.onActionChange(Live2dModel.P_MOUTH_OPEN, mouthInHeight / mouthInWidth / 2);
-//							}
-//							
-//							float mouthWidth = 0.0f;
-//							if (15f - face.yaw > 0) {
-//								mouthWidth = Math.abs(points[96].x -points[84].x);
-//							} else {
-//								mouthWidth = Math.abs(points[100].x -points[90].x);
-//							}
-//							float mouthHeight = points[96].y -points[84].y;
-//							if (Float.compare(mouthWidth, 0.0f) != 0) {
-//								float rate = mouthHeight / mouthWidth + 0.05f;
-//								rate = rate < -0.1f ? -0.1f : rate;
-//								rate = rate > 0.1f ? 0.1f : rate;
-//								listener.onActionChange(Live2dModel.P_MOUTH_FORM, rate * 10);
-//							}
-//
-//							float eyeRightWidth = Math.abs(points[53].x - points[54].x);
-//							float eyeRightHeight = Math.abs(points[72].y - points[73].y);
-//							if (Float.compare(mouthInWidth, 0.0f) != 0) {
-//								float rate = eyeRightHeight / eyeRightWidth;
-//								rate = rate < 0.8f ? 0.8f : rate;
-//								rate = rate > 1.0f ? 1.0f : rate;
-//								float rate0_2 = (rate - 0.8f) / 0.2f * 2;
-//								listener.onActionChange(Live2dModel.P_EYE_L_OPEN, rate0_2);
-//							}
-//
-//							float eyeLeftWidth = Math.abs(points[59].x - points[60].x);
-//							float eyeLeftHeight = Math.abs(points[75].y - points[76].y);
-//							if (Float.compare(mouthInWidth, 0.0f) != 0) {
-//								float rate = eyeLeftHeight / eyeLeftWidth;
-//								rate = rate < 0.8f ? 0.8f : rate;
-//								rate = rate > 1.0f ? 1.0f : rate;
-//								float rate0_2 = (rate - 0.8f) / 0.2f * 2;
-//								listener.onActionChange(Live2dModel.P_EYE_R_OPEN, rate0_2);
-//							}
-//							
-//							float nose = Math.abs(points[43].y - points[44].y);
-//							float browRightY = Math.abs(points[65].y - points[72].y);
-//							if (Float.compare(nose, 0.0f) != 0) {
-//								float rate = browRightY / nose - 1.2f;
-//								listener.onActionChange(Live2dModel.P_BROW_L_Y, rate * 2);
-//							}
-//							
-//							float browLeftY = Math.abs(points[70].y - points[75].y);
-//							if (Float.compare(nose, 0.0f) != 0) {
-//								float rate = browLeftY / nose - 1.2f;
-//								listener.onActionChange(Live2dModel.P_BROW_R_Y, rate * 2);
-//							}
+							FaceData faceData = FaceDataTransformer.transform(points, face.yaw, face.pitch, face.roll);
+							listener.onActionChange(faceData);
 						}
 						surfaceOverlap.getHolder().unlockCanvasAndPost(canvas);
 					}

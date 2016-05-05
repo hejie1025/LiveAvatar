@@ -1,13 +1,10 @@
 package com.metek.liveavatar.live2d;
 
-import android.app.Activity;
-
 import javax.microedition.khronos.opengles.GL10;
 
 import jp.live2d.Live2D;
 
 public class Live2dManager {
-	private Live2dView view;
 	private Live2dModel model;
 
 	public Live2dManager() {
@@ -18,14 +15,8 @@ public class Live2dManager {
 		model.update(gl);
 	}
 
-	public void setAction(String key, Float value) {
-		model.setTargetAction(key, value);
-	}
-	
-	public Live2dView createView(Activity activity) {
-		view = new Live2dView(activity);
-		view.setLive2DManager(this);
-		return view;
+	public void setAction(FaceData data) {
+		model.setTargetAction(data);
 	}
 
 	public Live2dModel getModel() {

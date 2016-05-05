@@ -1,18 +1,21 @@
 package com.metek.liveavatar.socket.send;
 
+import com.metek.liveavatar.live2d.FaceData;
 import com.metek.liveavatar.socket.MsgData;
 import com.metek.liveavatar.socket.NetConst;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MsgLogin extends MsgData {
+public class MsgFaceData extends MsgData {
 
-    public MsgLogin(String userId) {
-        super(NetConst.CODE_LOGIN);
+    public MsgFaceData(String friendId, FaceData faceData) {
+        super(NetConst.CODE_SEND_FACE_DATA);
         JSONObject json = new JSONObject();
+        JSONObject jsonFaceData = new JSONObject(faceData);
         try {
-            json.put(KEY_USERID, userId);
+            json.put(KEY_FRIENDID, friendId);
+            json.put("data", jsonFaceData);
         } catch (JSONException e) {
             e.printStackTrace();
         }

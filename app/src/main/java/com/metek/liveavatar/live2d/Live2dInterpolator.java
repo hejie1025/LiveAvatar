@@ -16,71 +16,43 @@ public class Live2dInterpolator {
 		currentValues = new HashMap<String, Float>();
 		tempValues = new HashMap<String, Float>();
 		
-		targetValues.put(Live2dModel.P_ANGLE_X, 0f);
-		targetValues.put(Live2dModel.P_ANGLE_Y, 0f);
-		targetValues.put(Live2dModel.P_ANGLE_Z, 0f);
-		targetValues.put(Live2dModel.P_MOUTH_OPEN, 0f);
-		targetValues.put(Live2dModel.P_MOUTH_FORM, 0f);
-		targetValues.put(Live2dModel.P_EYE_L_OPEN, 1f);
-		targetValues.put(Live2dModel.P_EYE_R_OPEN, 1f);
-		targetValues.put(Live2dModel.P_BROW_L_X, 0f);
-		targetValues.put(Live2dModel.P_BROW_L_Y, 0f);
-		targetValues.put(Live2dModel.P_BROW_L_ANGLE, 0f);
-		targetValues.put(Live2dModel.P_BROW_R_X, 0f);
-		targetValues.put(Live2dModel.P_BROW_R_Y, 0f);
-		targetValues.put(Live2dModel.P_BROW_R_ANGLE, 0f);
-		
-		currentValues.put(Live2dModel.P_ANGLE_X, 0f);
-		currentValues.put(Live2dModel.P_ANGLE_Y, 0f);
-		currentValues.put(Live2dModel.P_ANGLE_Z, 0f);
-		currentValues.put(Live2dModel.P_MOUTH_OPEN, 0f);
-		currentValues.put(Live2dModel.P_MOUTH_FORM, 0f);
-		currentValues.put(Live2dModel.P_EYE_L_OPEN, 1f);
-		currentValues.put(Live2dModel.P_EYE_R_OPEN, 1f);
-		currentValues.put(Live2dModel.P_BROW_L_X, 0f);
-		currentValues.put(Live2dModel.P_BROW_L_Y, 0f);
-		currentValues.put(Live2dModel.P_BROW_L_ANGLE, 0f);
-		currentValues.put(Live2dModel.P_BROW_R_X, 0f);
-		currentValues.put(Live2dModel.P_BROW_R_Y, 0f);
-		currentValues.put(Live2dModel.P_BROW_R_ANGLE, 0f);
-		
-		tempValues.put(Live2dModel.P_ANGLE_X, 0f);
-		tempValues.put(Live2dModel.P_ANGLE_Y, 0f);
-		tempValues.put(Live2dModel.P_ANGLE_Z, 0f);
-		tempValues.put(Live2dModel.P_MOUTH_OPEN, 0f);
-		tempValues.put(Live2dModel.P_MOUTH_FORM, 0f);
-		tempValues.put(Live2dModel.P_EYE_L_OPEN, 0f);
-		tempValues.put(Live2dModel.P_EYE_R_OPEN, 0f);
-		tempValues.put(Live2dModel.P_BROW_L_X, 0f);
-		tempValues.put(Live2dModel.P_BROW_L_Y, 0f);
-		tempValues.put(Live2dModel.P_BROW_L_ANGLE, 0f);
-		tempValues.put(Live2dModel.P_BROW_R_X, 0f);
-		tempValues.put(Live2dModel.P_BROW_R_Y, 0f);
-		tempValues.put(Live2dModel.P_BROW_R_ANGLE, 0f);
+		targetValues.put(FaceData.P_ANGLE_X, 0f);
+		targetValues.put(FaceData.P_ANGLE_Y, 0f);
+		targetValues.put(FaceData.P_ANGLE_Z, 0f);
+		targetValues.put(FaceData.P_MOUTH_OPEN, 0f);
+		targetValues.put(FaceData.P_MOUTH_FORM, 0f);
+		targetValues.put(FaceData.P_EYE_L_OPEN, 1f);
+		targetValues.put(FaceData.P_EYE_R_OPEN, 1f);
+		targetValues.put(FaceData.P_BROW_L_Y, 0f);
+		targetValues.put(FaceData.P_BROW_R_Y, 0f);
+
+		currentValues.put(FaceData.P_ANGLE_X, 0f);
+		currentValues.put(FaceData.P_ANGLE_Y, 0f);
+		currentValues.put(FaceData.P_ANGLE_Z, 0f);
+		currentValues.put(FaceData.P_MOUTH_OPEN, 0f);
+		currentValues.put(FaceData.P_MOUTH_FORM, 0f);
+		currentValues.put(FaceData.P_EYE_L_OPEN, 1f);
+		currentValues.put(FaceData.P_EYE_R_OPEN, 1f);
+		currentValues.put(FaceData.P_BROW_L_Y, 0f);
+		currentValues.put(FaceData.P_BROW_R_Y, 0f);
+
+		tempValues.put(FaceData.P_ANGLE_X, 0f);
+		tempValues.put(FaceData.P_ANGLE_Y, 0f);
+		tempValues.put(FaceData.P_ANGLE_Z, 0f);
+		tempValues.put(FaceData.P_MOUTH_OPEN, 0f);
+		tempValues.put(FaceData.P_MOUTH_FORM, 0f);
+		tempValues.put(FaceData.P_EYE_L_OPEN, 0f);
+		tempValues.put(FaceData.P_EYE_R_OPEN, 0f);
+		tempValues.put(FaceData.P_BROW_L_Y, 0f);
+		tempValues.put(FaceData.P_BROW_R_Y, 0f);
 	}
 	
-	public void setTargetValue(String key, float value) {
-		if (key.equals(Live2dModel.P_ANGLE_X)
-				|| key.equals(Live2dModel.P_ANGLE_Y)
-				|| key.equals(Live2dModel.P_ANGLE_Z)) {			
-//			if (Math.abs(tempValues.get(key) - value) < 3) {
-//				return;
-//			}
-			if (value > 30) {
-				value = 30;
-			} else if (value < -30) {
-				value = -30;
-			}
-		} else if (key.equals(Live2dModel.P_MOUTH_OPEN)) {
-			if (Math.abs(targetValues.get(key) - value) < 0.1) {
-				return;
-			}
-		} else {
-			if (Math.abs(targetValues.get(key) - value) < 0.2) {
-				return;
-			}
+	public void setTargetValue(FaceData data) {
+		Iterator<Entry<String, Float>> iter = data.entrySet().iterator();
+		while (iter.hasNext()) {
+			Entry<String, Float> entry = (Entry<String, Float>) iter.next();
+			targetValues.put(entry.getKey(), entry.getValue());
 		}
-		targetValues.put(key, value);
 	}
 	
 	public float getValue(String key) {
@@ -126,9 +98,9 @@ public class Live2dInterpolator {
 		}
 		
 		{
-			float x = currentValues.get(Live2dModel.P_ANGLE_X);
-			float _x = currentValues.get(Live2dModel.P_ANGLE_X);
-			float _v = tempValues.get(Live2dModel.P_ANGLE_X);
+			float x = currentValues.get(FaceData.P_ANGLE_X);
+			float _x = currentValues.get(FaceData.P_ANGLE_X);
+			float _v = tempValues.get(FaceData.P_ANGLE_X);
 			
 			float vmax = 2.0f;
 			float amax = 0.5f;
