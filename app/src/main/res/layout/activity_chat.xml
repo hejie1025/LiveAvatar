@@ -13,12 +13,12 @@
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_live2d" />
 
-    <fragment
-        android:id="@+id/fragment_live2d_self"
-        class="com.metek.liveavatar.ui.Live2dFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_live2d" />
+    <!--<fragment-->
+        <!--android:id="@+id/fragment_live2d_self"-->
+        <!--class="com.metek.liveavatar.ui.Live2dFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--tools:layout="@layout/fragment_live2d" />-->
 
     <fragment
         android:id="@+id/fragment_camera"

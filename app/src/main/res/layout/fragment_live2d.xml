@@ -10,8 +10,7 @@
         <com.metek.liveavatar.live2d.Live2dView
             android:id="@+id/model"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_1"/>
+            android:layout_height="match_parent" />
     </com.metek.liveavatar.face.FixedAspectRatioFrameLayout>
 
 </RelativeLayout>

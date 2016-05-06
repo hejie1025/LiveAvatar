@@ -593,7 +593,7 @@ public class FragmentTracker extends Fragment
             int area = s.width * s.height;
             if (area > iSizeMax || area < iSizeMin)
                 continue;
-            if (Math.abs(1.0 * s.width / s.height - 9.0 / 16.0) < 0.001)
+            if (Math.abs(1.0 * s.height / s.width - 9.0 / 16.0) < 0.01)
                 continue;
             if (area > areaBestSize) {
                 // Record this as the best size.

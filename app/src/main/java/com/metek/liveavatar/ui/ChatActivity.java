@@ -62,7 +62,7 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
 
         fragmentCamera = (FaceOverlapFragment) getFragmentManager().findFragmentById(R.id.fragment_camera);
         fragmentCamera.setOnActionChangeListener(this);
-        fragmentSelf = (Live2dFragment) getFragmentManager().findFragmentById(R.id.fragment_live2d_self);
+//        fragmentSelf = (Live2dFragment) getFragmentManager().findFragmentById(R.id.fragment_live2d_self);
         fragmentTarget = (Live2dFragment) getFragmentManager().findFragmentById(R.id.fragment_live2d_target);
 
         layoutMain = (RelativeLayout) findViewById(R.id.layout_main);
@@ -94,7 +94,7 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
             MsgFaceData msgFaceData = new MsgFaceData(friendId, data);
             TCPManager.getManager().send(msgFaceData);
         }
-//        fragmentSelf.setLive2dAction(data);
+        fragmentTarget.setLive2dAction(data);
     }
 
     TCPManager.ConnectListener tcpListener = new TCPManager.ConnectListener() {
@@ -137,7 +137,7 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
                     break;
                 case NetConst.CODE_SEND_FACE_DATA:
                     RecMsgFaceData recMsgFaceData = new RecMsgFaceData(data);
-                    fragmentSelf.setLive2dAction(recMsgFaceData.getFaceData());
+//                    fragmentSelf.setLive2dAction(recMsgFaceData.getFaceData());
                     break;
             }
         }
