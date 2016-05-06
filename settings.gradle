@@ -1,1 +1,1 @@
-include ':app', ':lib_ulsee', ':cvFaceAPI'
+include ':app', ':lib_sensetime', ':lib_ulsee'

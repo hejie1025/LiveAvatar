@@ -23,7 +23,7 @@ public class Live2dModel {
 		live2DModel.setParamFloat("PARAM_ANGLE_Y", inter.getValue(FaceData.P_ANGLE_Y));
 		live2DModel.setParamFloat("PARAM_ANGLE_Z", inter.getValue(FaceData.P_ANGLE_Z));
 		live2DModel.setParamFloat("PARAM_MOUTH_OPEN_Y", inter.getValue(FaceData.P_MOUTH_OPEN));
-		live2DModel.setParamFloat("PARAM_EYE_L_OPEN", inter.getValue(FaceData.P_MOUTH_FORM));
+		live2DModel.setParamFloat("PARAM_MOUTH_FORM", inter.getValue(FaceData.P_MOUTH_FORM));
 		live2DModel.setParamFloat("PARAM_EYE_L_OPEN", inter.getValue(FaceData.P_EYE_L_OPEN));
 		live2DModel.setParamFloat("PARAM_EYE_R_OPEN", inter.getValue(FaceData.P_EYE_R_OPEN));
 		live2DModel.setParamFloat("PARAM_BROW_L_Y", inter.getValue(FaceData.P_BROW_L_Y));
