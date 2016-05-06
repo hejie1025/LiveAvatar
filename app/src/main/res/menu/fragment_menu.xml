@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/stickySwitch"
+      android:title="Sticky"
+      android:orderInCategory="1"
+      android:checkable="true"
+      android:checked="true"/>
+<item android:id="@+id/highPrecision"
+      android:title="High Precision"
+      android:titleCondensed="High Prec."
+      android:orderInCategory="2"
+      android:checkable="true"/>
+<item android:id="@+id/showPupilsGaze"
+      android:orderInCategory="10"
+      android:title="Show pupils and gaze"
+      android:titleCondensed="Show gaze"
+      android:showAsAction="never"
+      android:checkable="true"
+      android:checked="false"/>
+<item android:id="@+id/showPose"
+      android:orderInCategory="10"
+      android:title="Show pose"
+      android:showAsAction="never"
+      android:checkable="true"
+      android:checked="false"/>
+</menu>

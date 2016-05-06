@@ -10,12 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <fragment
-            android:id="@+id/face_overlap_fragment"
-            class="com.metek.liveavatar.face.CameraOverlapFragment"
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/fragment"
+            android:name="com.metek.liveavatar.ulsee.FragmentTracker"
+            tools:layout="@layout/fragment_tracker"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_camera_overlap" />
+            android:layout_alignParentRight="true"/>
     </com.metek.liveavatar.face.FixedAspectRatioFrameLayout>
 
     <EditText
