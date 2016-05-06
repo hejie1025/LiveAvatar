@@ -36,7 +36,7 @@ public class CameraOverlapFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_camera_overlap, container, false);
+		View view = inflater.inflate(R.layout.fragment_camera, container, false);
 
 		surfaceOverlap = (SurfaceView) view.findViewById(R.id.surface_overlap);
 		surfaceOverlap.setZOrderOnTop(true);
