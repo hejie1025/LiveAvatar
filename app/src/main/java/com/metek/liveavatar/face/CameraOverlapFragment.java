@@ -121,7 +121,8 @@ public class CameraOverlapFragment extends Fragment {
 
 				Camera.Size tempSize = null;
 				for (Camera.Size size : pictureSizes) {
-					if (tempSize == null && size.width >= 1280) {
+//					if (tempSize == null && size.width >= 1280) {
+					if (tempSize == null && size.width >= 320) {
 						tempSize = size;
 					}
 					Log.i(TAG, "initCamera: PictrueSize width:" + size.width + " height:" + size.height);

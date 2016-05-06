@@ -1,2 +1,1 @@
-include ':app', ':lib_ulsee'
-include ':cvFaceAPI'
+include ':app', ':lib_ulsee', ':cvFaceAPI'

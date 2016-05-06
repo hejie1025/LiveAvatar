@@ -26,6 +26,6 @@ dependencies {
     compile files('libs/live2d_android.jar')
     compile files('libs/mina-core-2.0.7.jar')
     compile files('libs/slf4j-api-1.6.6.jar')
-    compile project(path: ':cvFaceAPI')
+    compile project(':cvFaceAPI')
     compile project(':lib_ulsee')
 }
