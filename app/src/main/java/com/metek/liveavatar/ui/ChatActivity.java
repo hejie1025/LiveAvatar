@@ -1,5 +1,7 @@
 package com.metek.liveavatar.ui;
 
+import android.animation.ObjectAnimator;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,9 +13,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.metek.liveavatar.R;
-import com.metek.liveavatar.face.FaceOverlapFragment;
+import com.metek.liveavatar.User;
+import com.metek.liveavatar.face.sensetime.FaceOverlapFragment;
 import com.metek.liveavatar.live2d.FaceData;
 import com.metek.liveavatar.live2d.FileManager;
+import com.metek.liveavatar.live2d.Live2dFragment;
 import com.metek.liveavatar.socket.MsgData;
 import com.metek.liveavatar.socket.NetConst;
 import com.metek.liveavatar.socket.TCPManager;
@@ -24,16 +28,16 @@ import com.metek.liveavatar.socket.send.MsgFaceData;
 import com.metek.liveavatar.socket.send.MsgLogin;
 import com.metek.liveavatar.socket.send.MsgMatch;
 import com.metek.liveavatar.socket.send.MsgResponse;
+import com.metek.liveavatar.utils.AnimationHelper;
 
 public class ChatActivity extends AppCompatActivity implements FaceOverlapFragment.onActionChangeListener {
     private static final String TAG = ChatActivity.class.getSimpleName();
 
-    private String userId = "666";
     private String friendId;
     private boolean isChatting = false;
 
     private FaceOverlapFragment fragmentCamera;
-    private Live2dFragment fragmentSelf;
+//    private Live2dFragment fragmentSelf;
     private Live2dFragment fragmentTarget;
 
     private RelativeLayout layoutMain;
@@ -54,16 +58,16 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
     private Animation requestOutAnim, requestInAnim;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
         FileManager.init(this.getApplicationContext());
 
-        fragmentCamera = (FaceOverlapFragment) getFragmentManager().findFragmentById(R.id.fragment_camera);
-        fragmentCamera.setOnActionChangeListener(this);
+//        fragmentCamera = (FaceOverlapFragment) getFragmentManager().findFragmentById(R.id.fragment_camera);
+//        fragmentCamera.setOnActionChangeListener(this);
 //        fragmentSelf = (Live2dFragment) getFragmentManager().findFragmentById(R.id.fragment_live2d_self);
-        fragmentTarget = (Live2dFragment) getFragmentManager().findFragmentById(R.id.fragment_live2d_target);
+//        fragmentTarget = (Live2dFragment) getFragmentManager().findFragmentById(R.id.fragment_live2d_target);
 
         layoutMain = (RelativeLayout) findViewById(R.id.layout_main);
         layoutResource = (RelativeLayout) findViewById(R.id.layout_resource);
@@ -86,6 +90,14 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
 //
 //        fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 //        fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+
+
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        fragmentCamera = new FaceOverlapFragment();
+        transaction.add(R.id.chat_main, fragmentCamera);
+        transaction.commit();
+        fragmentCamera.setOnActionChangeListener(this);
     }
 
     @Override
@@ -94,10 +106,10 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
             MsgFaceData msgFaceData = new MsgFaceData(friendId, data);
             TCPManager.getManager().send(msgFaceData);
         }
-        fragmentTarget.setLive2dAction(data);
+//        fragmentTarget.setLive2dAction(data);
     }
 
-    TCPManager.ConnectListener tcpListener = new TCPManager.ConnectListener() {
+    private TCPManager.ConnectListener tcpListener = new TCPManager.ConnectListener() {
         @Override
         public void onConnect(int state, MsgData data) {
             if (state != CONN_OK) return;
@@ -106,7 +118,7 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
             switch (data.code) {
                 case NetConst.CODE_LOGIN:
                     Log.v(TAG, "连接服务器成功");
-                    MsgLogin msgLogin = new MsgLogin(userId);
+                    MsgLogin msgLogin = new MsgLogin(User.getInstance().getUserId());
                     TCPManager.getManager().send(msgLogin);
                     break;
                 case NetConst.CODE_MATCH:
@@ -120,7 +132,7 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
                     Log.v(TAG, "收到匹配请求");
                     RecMsgRequest recMsgRequest = new RecMsgRequest(data);
                     TextView tvMessage = (TextView) layoutRequest.findViewById(R.id.request_message);
-                    String friendName =  recMsgRequest.getFriendName();
+                    String friendName = recMsgRequest.getFriendName();
                     String message = String.format(getResources().getString(R.string.request_message), friendName);
                     tvMessage.setText(message);
 
@@ -149,9 +161,22 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
         btnMatch.setVisibility(View.VISIBLE);
         btnResource.setVisibility(View.VISIBLE);
         btnOptions.setVisibility(View.VISIBLE);
+
         TCPManager.getManager().setConnectListener(tcpListener);
         TCPManager.getManager().connect();
         // TODO fragmentCamera执行缩小动画
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        Live2dFragment fragmentTarget = new Live2dFragment();
+        transaction.replace(R.id.chat_main, fragmentTarget);
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        transaction.commit();
+
+        transaction = getFragmentManager().beginTransaction();
+        fragmentCamera = new FaceOverlapFragment();
+        transaction.add(R.id.chat_sub, fragmentCamera);
+        transaction.commit();
+        fragmentCamera.setOnActionChangeListener(this);
     }
 
     public void onClickMatch(View view) {
@@ -249,5 +274,19 @@ public class ChatActivity extends AppCompatActivity implements FaceOverlapFragme
             }
         });
         layoutRequest.startAnimation(requestOutAnim);
+    }
+
+    public void target(View view) {
+//        ScaleAnimation sa = new ScaleAnimation(1.0f, 0.5f, 1.0f, 0.5f);
+//        TranslateAnimation ta = new TranslateAnimation(0.0f, 500f, 0.0f, 500f);
+//        ta.setFillAfter(true);
+//        ta.setDuration(500);
+//        view.startAnimation(ta);
+
+        ObjectAnimator sa = ObjectAnimator.ofFloat(view, "scaleX", 0.1f, 0.3f, 0.5f, 0.8f, 1.0f, 1.2f, 1.4f, 1.6f, 1.8f, 2.0f);
+        sa.setDuration(2000);
+        sa.setRepeatCount(2);
+        sa.setRepeatMode(ObjectAnimator.REVERSE);
+        sa.start();
     }
 }

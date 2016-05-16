@@ -1,11 +1,11 @@
-package com.metek.liveavatar.ulsee.gles;
+package com.metek.liveavatar.face.ulsee.gles;
 
 import android.hardware.Camera;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
-import com.metek.liveavatar.ulsee.FragmentTracker;
+import com.metek.liveavatar.face.ulsee.FragmentTracker;
 
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;

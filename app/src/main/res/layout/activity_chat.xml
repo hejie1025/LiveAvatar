@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_chat"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_1"
+    android:background="#fff"
     tools:context="com.metek.liveavatar.ui.ChatActivity">
 
-    <fragment
-        android:id="@+id/fragment_live2d_target"
-        class="com.metek.liveavatar.ui.Live2dFragment"
+    <com.metek.liveavatar.face.sensetime.FixedAspectRatioFrameLayout
+        android:id="@+id/chat_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_live2d" />
+        android:layout_height="match_parent" />
 
-    <!--<fragment-->
-        <!--android:id="@+id/fragment_live2d_self"-->
-        <!--class="com.metek.liveavatar.ui.Live2dFragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--tools:layout="@layout/fragment_live2d" />-->
 
-    <fragment
-        android:id="@+id/fragment_camera"
-        class="com.metek.liveavatar.face.FaceOverlapFragment"
+    <com.metek.liveavatar.face.sensetime.FixedAspectRatioFrameLayout
+        android:id="@+id/chat_sub"
         android:layout_width="120dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        tools:layout="@layout/fragment_camera" />
+        android:layout_margin="16dp" />
 
     <RelativeLayout
         android:id="@+id/layout_main"

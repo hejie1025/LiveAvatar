@@ -4,47 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:gravity="center"
     tools:context=".ui.MainActivity">
 
-    <com.metek.liveavatar.face.FixedAspectRatioFrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/fragment"
-            android:name="com.metek.liveavatar.ulsee.FragmentTracker"
-            tools:layout="@layout/fragment_tracker"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"/>
-    </com.metek.liveavatar.face.FixedAspectRatioFrameLayout>
-
-    <EditText
-        android:id="@+id/user_id"
-        android:layout_width="120dp"
-        android:layout_height="48dp"
-        android:textColor="#fff"
-        android:textColorHint="#fff"
-        android:hint="用户名" />
-
-    <ImageView
+    <Button
+        android:id="@+id/user1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:contentDescription="@null"
-        android:layout_marginBottom="16dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/board" />
+        android:onClick="user1"
+        android:text="用户名：666" />
 
-    <ImageView
-        android:id="@+id/transform"
+    <Button
+        android:id="@+id/user2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="4dp"
-        android:contentDescription="@null"
-        android:onClick="transform"
-        android:src="@drawable/selector_transform" />
+        android:layout_below="@+id/user1"
+        android:onClick="user2"
+        android:text="用户名：233" />
 </RelativeLayout>

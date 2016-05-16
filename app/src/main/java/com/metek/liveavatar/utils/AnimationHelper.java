@@ -1,4 +1,4 @@
-package com.metek.liveavatar.ui;
+package com.metek.liveavatar.utils;
 
 import android.view.animation.Animation;
 

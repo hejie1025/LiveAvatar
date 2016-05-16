@@ -1,4 +1,4 @@
-package com.metek.liveavatar.face;
+package com.metek.liveavatar.face.sensetime;
 
 import android.app.Fragment;
 import android.content.res.Configuration;
@@ -38,11 +38,8 @@ public class CameraOverlapFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_camera, container, false);
 
-		surfaceOverlap = (SurfaceView) view.findViewById(R.id.surface_overlap);
-		surfaceOverlap.setZOrderOnTop(true);
-		surfaceOverlap.getHolder().setFormat(PixelFormat.TRANSLUCENT);
-
 		surfaceCamera = (SurfaceView) view.findViewById(R.id.surface_camera);
+//		surfaceCamera.setZOrderOnTop(true);
 		surfaceHolder = surfaceCamera.getHolder();
 		surfaceHolder.addCallback(new SurfaceHolder.Callback() {
 
@@ -69,6 +66,10 @@ public class CameraOverlapFragment extends Fragment {
 				initCamera();
 			}
 		});
+
+		surfaceOverlap = (SurfaceView) view.findViewById(R.id.surface_overlap);
+		surfaceOverlap.setZOrderOnTop(true);
+		surfaceOverlap.getHolder().setFormat(PixelFormat.TRANSLUCENT);
 
 		return view;
 	}

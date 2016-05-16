@@ -1,4 +1,4 @@
-package com.metek.liveavatar.ulsee;
+package com.metek.liveavatar.face.ulsee;
 
 import android.graphics.SurfaceTexture;
 import android.opengl.GLES20;
@@ -6,10 +6,10 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
-import com.metek.liveavatar.ulsee.gles.EglCore;
-import com.metek.liveavatar.ulsee.gles.EglSurface;
-import com.metek.liveavatar.ulsee.gles.GLRendering;
-import com.metek.liveavatar.ulsee.gles.glUtils;
+import com.metek.liveavatar.face.ulsee.gles.EglCore;
+import com.metek.liveavatar.face.ulsee.gles.EglSurface;
+import com.metek.liveavatar.face.ulsee.gles.GLRendering;
+import com.metek.liveavatar.face.ulsee.gles.glUtils;
 
 
 //import android.util.Size;

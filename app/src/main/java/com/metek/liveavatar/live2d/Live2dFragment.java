@@ -1,4 +1,4 @@
-package com.metek.liveavatar.ui;
+package com.metek.liveavatar.live2d;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.metek.liveavatar.R;
-import com.metek.liveavatar.live2d.FaceData;
-import com.metek.liveavatar.live2d.Live2dView;
 
 public class Live2dFragment extends Fragment {
     private Live2dView live2dView;

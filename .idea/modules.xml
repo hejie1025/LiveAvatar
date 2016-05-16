@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LiveAvatar.iml" filepath="$PROJECT_DIR$/LiveAvatar.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_sensetime/cvFaceAPI.iml" filepath="$PROJECT_DIR$/lib_sensetime/cvFaceAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib_sensetime/lib_sensetime.iml" filepath="$PROJECT_DIR$/lib_sensetime/lib_sensetime.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_ulsee/lib_ulsee.iml" filepath="$PROJECT_DIR$/lib_ulsee/lib_ulsee.iml" />
     </modules>
   </component>

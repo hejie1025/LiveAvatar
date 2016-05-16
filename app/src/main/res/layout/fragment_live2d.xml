@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.metek.liveavatar.face.FixedAspectRatioFrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <!--<com.metek.liveavatar.face.sensetime.FixedAspectRatioFrameLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
 
         <com.metek.liveavatar.live2d.Live2dView
             android:id="@+id/model"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </com.metek.liveavatar.face.FixedAspectRatioFrameLayout>
+    <!--</com.metek.liveavatar.face.sensetime.FixedAspectRatioFrameLayout>-->
 
 </RelativeLayout>

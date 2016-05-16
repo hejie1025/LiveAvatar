@@ -1,4 +1,4 @@
-package com.metek.liveavatar.ulsee.gles;
+package com.metek.liveavatar.face.ulsee.gles;
 
 // Utility functions to manage an EGLSurface setup. Some bits of code are from Google's Grafika project,
 // released under Apache License v2.0.

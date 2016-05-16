@@ -1,4 +1,4 @@
-package com.metek.liveavatar.ulsee.gles;
+package com.metek.liveavatar.face.ulsee.gles;
 
 import android.opengl.GLES20;
 import android.opengl.Matrix;

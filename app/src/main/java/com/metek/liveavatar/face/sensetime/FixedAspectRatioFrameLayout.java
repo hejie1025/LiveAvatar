@@ -1,4 +1,4 @@
-package com.metek.liveavatar.face;
+package com.metek.liveavatar.face.sensetime;
 
 import android.content.Context;
 import android.util.AttributeSet;
